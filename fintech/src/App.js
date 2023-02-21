@@ -1,10 +1,11 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-const Welcome = () => {
+const Welcome = (props) => {
+  console.log(props);
   return (
     <p>
-      안<b>녕</b>하세요
+      안녕하세요! {props.userAge}세 {props.userHeight}cm {props.userName} 님 !
     </p>
   );
 };
@@ -12,7 +13,7 @@ const Welcome = () => {
 function App() {
   return (
     <div className="App">
-      <Welcome></Welcome>
+      <Welcome userName="유관우" userAge={35} userHeight={175}></Welcome>
     </div>
   );
 }
