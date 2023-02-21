@@ -1,19 +1,13 @@
 import logo from "./logo.svg";
 import "./App.css";
-
-const Welcome = (props) => {
-  console.log(props);
-  return (
-    <p>
-      안녕하세요! {props.userAge}세 {props.userHeight}cm {props.userName} 님 !
-    </p>
-  );
-};
+import Welcome from "./components/Welcome";
 
 function App() {
   return (
     <div className="App">
       <Welcome userName="유관우" userAge={35} userHeight={175}></Welcome>
+      <Welcome userName="홍길동" userAge={20} userHeight={175}></Welcome>
+      <Welcome userName="고길동" userAge={48} userHeight={175}></Welcome>
     </div>
   );
 }
