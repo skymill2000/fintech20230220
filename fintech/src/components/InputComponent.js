@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-const InputComponents = ({ handleChange }) => {
+const InputComponents = ({ handleChange, handleClick }) => {
   return (
     <>
       <input onChange={handleChange}></input>
-      <button>입력</button>
+      <button onClick={handleClick}>입력</button>
     </>
   );
 };
