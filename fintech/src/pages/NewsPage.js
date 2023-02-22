@@ -17,8 +17,10 @@ const NewsPage = () => {
     //axios 통해서 news API 에 요청 보내기
     console.log("서버로 요청을 보냅니다.");
     const requestUrl = `https://newsapi.org/v2/everything?q=${searchInputText}&from=2023-01-22&sortBy=popularity&apiKey=78bc6ddd8cdb48ceac76f5f9b9dfc4c5&language=ko`;
-    axios.get(requestUrl).then((response) => {
-      console.log(response);
+    axios.get(requestUrl).then(({ data }) => {
+      console.log(data.articles);
+      const articles = data.articles;
+      setNewsList(articles); //???
     });
   };
   return (
