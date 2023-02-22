@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NewsPage from "./pages/NewsPage";
 import IndexPage from "./pages/IndexPage";
+import AuthResultPage from "./pages/AuthResultPage";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<IndexPage />}></Route>
         <Route path="/news" element={<NewsPage />}></Route>
+        <Route path="/authResult" element={<AuthResultPage />}></Route>
       </Routes>
     </BrowserRouter>
   );
