@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AppHeader from "../components/Common/AppHeader";
 import MainAccountCard from "../components/Main/MainAccountCard";
 
@@ -8,6 +8,8 @@ const MainPage = () => {
     console.log("시작하자마 일을 시작합니다.");
     getAccountList();
   }, []);
+
+  const [accountList, setAcccountList] = useState([]);
 
   const getAccountList = () => {
     const accessToken = localStorage.getItem("accessToken");
@@ -21,19 +23,28 @@ const MainPage = () => {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-      params: {},
+      params: {
+        user_seq_no: userSeqNo,
+      },
     };
 
-    axios(option).then(() => {});
+    axios(option).then(({ data }) => {
+      console.log(data);
+      setAcccountList(data.res_list);
+    });
   };
 
   return (
     <div>
       <AppHeader title={"계좌 목록"}></AppHeader>
-      <MainAccountCard
-        bankName={"테스트"}
-        fintechUseNo={"24123123"}
-      ></MainAccountCard>
+      {accountList.map((data) => {
+        return (
+          <MainAccountCard
+            bankName={data.bank_name}
+            fintechUseNo={data.fintech_use_num}
+          ></MainAccountCard>
+        );
+      })}
     </div>
   );
 };
