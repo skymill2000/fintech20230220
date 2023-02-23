@@ -11,8 +11,8 @@ const AuthResultPage = () => {
   const handleAuthButtonClick = () => {
     let sendData = {
       code: authCode,
-      client_id: "e530acfa-5f42-4cc6-8823-e3bd59f9bd2e", //본인 클라이언트 정보를 활용해 주세요
-      client_secret: "98240f4b-20f8-46f0-b507-8619d6023e6f", //본인 클라이언트 정보를 활용해 주세요
+      client_id: "9c785a50-ac39-4dac-af61-eb82eb80e139", //본인 클라이언트 정보를 활용해 주세요
+      client_secret: "93b9698e-14a8-4462-9f76-6fe06e0250de", //본인 클라이언트 정보를 활용해 주세요
       redirect_uri: "http://localhost:3000/authResult",
       grant_type: "authorization_code",
     };
