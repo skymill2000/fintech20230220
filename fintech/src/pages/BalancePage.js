@@ -15,7 +15,7 @@ const BalancePage = () => {
 
   useEffect(() => {
     getBalance();
-    console.log(genTransId());
+    getTransactionList();
   }, []);
 
   const genTransId = () => {
@@ -57,7 +57,31 @@ const BalancePage = () => {
   /**
    * #work6 거래내역 조회 api 활용해서 데이터 조회하기
    */
-  const getTransactionList = () => {};
+  const getTransactionList = () => {
+    const accessToken = localStorage.getItem("accessToken");
+
+    const option = {
+      method: "GET",
+      url: "/v2.0/account/transaction_list/fin_num",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      params: {
+        bank_tran_id: genTransId(),
+        fintech_use_num: fintechUseNo,
+        inquiry_type: "A",
+        inquiry_base: "D",
+        from_date: "20230223",
+        to_date: "20230223",
+        sort_order: "D",
+        tran_dtime: "20230223114800",
+      },
+    };
+    axios(option).then(({ data }) => {
+      console.log(data);
+      setTrasactionList(data.res_list);
+    });
+  };
 
   return (
     <div>
