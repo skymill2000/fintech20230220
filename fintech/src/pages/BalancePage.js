@@ -3,6 +3,7 @@ import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import BalanceCard from "../components/Balance/BalanceCard";
+import TransactionList from "../components/Balance/TransactionList";
 import AppHeader from "../components/Common/AppHeader";
 
 const BalancePage = () => {
@@ -10,6 +11,7 @@ const BalancePage = () => {
   const fintechUseNo = queryString.parse(search).fintechUseNo;
 
   const [balance, setBalance] = useState({});
+  const [transactionList, setTrasactionList] = useState([]);
 
   useEffect(() => {
     getBalance();
@@ -52,6 +54,11 @@ const BalancePage = () => {
     });
   };
 
+  /**
+   * #work6 거래내역 조회 api 활용해서 데이터 조회하기
+   */
+  const getTransactionList = () => {};
+
   return (
     <div>
       <AppHeader title={"잔액조회"}></AppHeader>
@@ -60,6 +67,7 @@ const BalancePage = () => {
         fintechNo={fintechUseNo}
         balance={balance.balance_amt}
       ></BalanceCard>
+      <TransactionList transactionList={transactionList}></TransactionList>
     </div>
   );
 };
