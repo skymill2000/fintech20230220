@@ -1,7 +1,13 @@
+import axios from "axios";
+import queryString from "query-string";
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import AppHeader from "../components/Common/AppHeader";
 
 const BalancePage = () => {
+  const search = useLocation().search;
+  const fintechUseNo = queryString.parse(search).fintechUseNo;
+
   useEffect(() => {
     getBalance();
     console.log(genTransId());
@@ -9,7 +15,8 @@ const BalancePage = () => {
 
   const genTransId = () => {
     let countnum = Math.floor(Math.random() * 1000000000) + 1;
-    let transId = "M202300440" + countnum; //이용기관번호 본인것 입력
+    const clientNo = "M202300440";
+    let transId = clientNo + "U" + countnum; //이용기관번호 본인것 입력
     return transId;
   };
 
@@ -22,6 +29,23 @@ const BalancePage = () => {
      * axios option 통해서 데이터를 조회
      * BalanceCard 렌더링 해주세요 !
      */
+    const accessToken = localStorage.getItem("accessToken");
+
+    const option = {
+      method: "GET",
+      url: "/v2.0/account/balance/fin_num",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      params: {
+        bank_tran_id: genTransId(),
+        fintech_use_num: fintechUseNo,
+        tran_dtime: "20230223114800",
+      },
+    };
+    axios(option).then(({ data }) => {
+      console.log(data);
+    });
   };
 
   return (
