@@ -1,27 +1,58 @@
 import React, { useState } from "react";
 import AppHeader from "../components/Common/AppHeader";
 import { QrReader } from "react-qr-reader";
+import ModalWithdraw from "../components/Withdraw/ModalWithdraw";
+import Modal from "react-modal";
 
 const QrReaderPage = () => {
   const [data, setData] = useState("No result");
+  const [openModal, setOpenModal] = useState(false); //no camera : true
+  const CustomStyles = {
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      zIndex: "9",
+    },
+    content: {
+      width: "95%",
+      border: `0 solid black`,
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      zIndex: "99999",
+    },
+  };
+
+  const closeModal = () => {
+    setOpenModal(false);
+  };
 
   return (
-    <div>
-      <AppHeader title={"QR 코드 리더기"}></AppHeader>
+    <>
+      <AppHeader title={"QR 읽기"}></AppHeader>
       <QrReader
         onResult={(result, error) => {
           if (!!result) {
             setData(result?.text);
+            setOpenModal(true);
           }
-
           if (!!error) {
-            console.info(error);
           }
         }}
         style={{ width: "100%" }}
       />
       <p>{data}</p>
-    </div>
+
+      <Modal
+        isOpen={openModal}
+        style={CustomStyles}
+        onRequestClose={closeModal}
+      >
+        <ModalWithdraw tofintechno={data}></ModalWithdraw>
+      </Modal>
+    </>
   );
 };
 
