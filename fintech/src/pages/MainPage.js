@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect } from "react";
 import AppHeader from "../components/Common/AppHeader";
 import MainAccountCard from "../components/Main/MainAccountCard";
@@ -15,13 +16,15 @@ const MainPage = () => {
     //axios 요청을 작성해야함
     //header 설정
     const option = {
-      method: "",
-      url: "",
+      method: "GET",
+      url: "/v2.0/user/me",
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       params: {},
     };
+
+    axios(option).then(() => {});
   };
 
   return (
