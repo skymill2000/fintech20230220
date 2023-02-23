@@ -40,6 +40,7 @@ const MainPage = () => {
       {accountList.map((data) => {
         return (
           <MainAccountCard
+            key={data.fintech_use_num}
             bankName={data.bank_name}
             fintechUseNo={data.fintech_use_num}
           ></MainAccountCard>
