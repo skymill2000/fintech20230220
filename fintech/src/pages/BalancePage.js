@@ -1,12 +1,15 @@
 import axios from "axios";
 import queryString from "query-string";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import BalanceCard from "../components/Balance/BalanceCard";
 import AppHeader from "../components/Common/AppHeader";
 
 const BalancePage = () => {
   const search = useLocation().search;
   const fintechUseNo = queryString.parse(search).fintechUseNo;
+
+  const [balance, setBalance] = useState({});
 
   useEffect(() => {
     getBalance();
@@ -45,12 +48,18 @@ const BalancePage = () => {
     };
     axios(option).then(({ data }) => {
       console.log(data);
+      setBalance(data);
     });
   };
 
   return (
     <div>
       <AppHeader title={"잔액조회"}></AppHeader>
+      <BalanceCard
+        bankName={balance.bank_name}
+        fintechNo={fintechUseNo}
+        balance={balance.balance_amt}
+      ></BalanceCard>
     </div>
   );
 };
