@@ -6,7 +6,7 @@ import Modal from "react-modal";
 
 const QrReaderPage = () => {
   const [data, setData] = useState("No result");
-  const [openModal, setOpenModal] = useState(false); //no camera : true
+  const [openModal, setOpenModal] = useState(true); //no camera : true
   const CustomStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.7)",

@@ -29,7 +29,28 @@ const ModalWithdraw = ({ tofintechno }) => {
     getAccountList();
   }, []);
 
-  const getAccountList = () => {};
+  const getAccountList = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    const userSeqNo = localStorage.getItem("userSeqNo");
+    console.log(accessToken, userSeqNo);
+    //axios 요청을 작성해야함
+    //header 설정
+    const option = {
+      method: "GET",
+      url: "/v2.0/user/me",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      params: {
+        user_seq_no: userSeqNo,
+      },
+    };
+
+    axios(option).then(({ data }) => {
+      console.log(data);
+      setAccountList(data.res_list);
+    });
+  };
 
   return (
     <ModalWithdrawBlock>
