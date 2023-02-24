@@ -1,4 +1,4 @@
-const { createCipheriv, createHmac } = require("crypto");
+const { createCipheriv, createHmac, createDecipheriv } = require("crypto");
 
 //단방향 암호화
 const sha256Enc = (plainText) => {
@@ -9,8 +9,8 @@ const sha256Enc = (plainText) => {
 
 //양방향 암호화
 const makeAES = (plainText) => {
-  const key = "!w#wkW3AY5Tq#hGkh#UwAkq3TKk3s#36";
-  const iv = "TIEY4xGsHK5YwTqs";
+  const key = "A1#tsq3AY5Tq#hGkh#UwAkq3TKk3s436";
+  const iv = "ZREW4xGsHK5YwTqs";
   const cipher = createCipheriv("aes-256-cbc", key, iv);
   let encrypted = cipher.update(plainText, "utf8", "base64");
   encrypted += cipher.final("base64");
@@ -18,8 +18,18 @@ const makeAES = (plainText) => {
   return encrypted;
 };
 
-makeAES("유관우/890991271764/21651289764");
+const decryptAES = (plainText) => {
+  const key = "A1#tsq3AY5Tq#hGkh#UwAkq3TKk3s436";
+  const iv = "ZREW4xGsHK5YwTqs";
+  const decipher = createDecipheriv("aes-256-cbc", key, iv);
+  let deciphered = decipher.update(plainText, "base64", "utf8");
+  deciphered += decipher.final("utf8");
+  console.log("aes-256-cbc 방식으로 복호화한 값 : ", deciphered);
+  return deciphered;
+};
 
+makeAES("고생하셨습니다!!abc");
+decryptAES("IZ2IHGnij6/4i0BfYGRT9RxGwb0qBtldOXBBm7VEQUk=");
 const dbInsureEncrypt = () => {
   const timeSt = "";
   const appSecretKey = "";

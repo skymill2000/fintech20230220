@@ -51,11 +51,23 @@ app.get("/transaction", (req, res) => {
   });
 });
 
+app.get("/final", function (req, res) {});
+
 const genTransId = () => {
   let countnum = Math.floor(Math.random() * 1000000000) + 1;
   const clientNo = "M202300440";
   let transId = clientNo + "U" + countnum; //이용기관번호 본인것 입력
   return transId;
+};
+
+const makeAES = (plainText) => {
+  const key = "A1#tsq3AY5Tq#hGkh#UwAkq3TKk3s436";
+  const iv = "ZREW4xGsHK5YwTqs";
+  const cipher = createCipheriv("aes-256-cbc", key, iv);
+  let encrypted = cipher.update(plainText, "utf8", "base64");
+  encrypted += cipher.final("base64");
+  console.log("aes-256-cbc 방식으로 암호화한 값 : ", encrypted);
+  return encrypted;
 };
 
 app.listen(port);
