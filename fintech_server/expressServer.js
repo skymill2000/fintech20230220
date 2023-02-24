@@ -1,5 +1,6 @@
 const express = require("express");
 const axios = require("axios");
+const port = 3000;
 const app = express();
 const accessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIxMTAwMDM0NzM2Iiwic2NvcGUiOlsiaW5xdWlyeSIsImxvZ2luIiwidHJhbnNmZXIiXSwiaXNzIjoiaHR0cHM6Ly93d3cub3BlbmJhbmtpbmcub3Iua3IiLCJleHAiOjE2ODQ4OTYyODcsImp0aSI6IjEwNDFiMmE4LTM5ZmMtNDg2NC04YzQwLWM2NWI4ZjBiODRhYyJ9.muvvn9dl_SR-dzY0Il5-v3-RCPZpiVWBuGfU_1EsT6k"; //데이터베이스 에서 가져온 혹은 클라이언트에서 전달받은 accessToken
@@ -26,6 +27,7 @@ app.put("/user", (req, res) => {
 });
 
 app.get("/transaction", (req, res) => {
+  console.log(req);
   const option = {
     method: "GET",
     url: "https://testapi.openbanking.or.kr/v2.0/account/transaction_list/fin_num",
@@ -44,7 +46,6 @@ app.get("/transaction", (req, res) => {
     },
   };
   axios(option).then(({ data }) => {
-    console.log(data);
     //mysql 데이터 입력 쿼리
     res.json(data);
   });
@@ -57,4 +58,5 @@ const genTransId = () => {
   return transId;
 };
 
-app.listen(4000);
+app.listen(port);
+console.log(`http://localhost:${port}`);
